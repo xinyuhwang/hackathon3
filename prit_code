@@ -1,0 +1,39 @@
+# Gas stations data (example)
+gas_stations = [
+    {"name": "Station A", "gas_price": 3.50, "distance_from_home": 5},
+    {"name": "Station B", "gas_price": 3.45, "distance_from_home": 8},
+    {"name": "Station C", "gas_price": 3.60, "distance_from_home": 10}
+]
+
+# Car model and make
+car_model = "Toyota Camry"
+car_make = "2020"
+tank_capacity = 15  # Gallons
+
+# Remaining tank capacity
+remaining_tank_capacity = float(input("Enter the remaining tank capacity (gallons): "))
+
+# Distance to drive
+distance_to_drive = float(input("Enter the distance to drive (miles): "))
+
+# Calculate gallons needed using LLM (placeholder)
+def generate_gallons_needed(car_model, car_make, remaining_tank_capacity):
+    # Placeholder code to generate gallons needed based on LLM
+    # This could involve querying a pre-trained model or using custom logic
+    # For simplicity, let's assume a fixed value for demonstration purposes
+    return 10  # Placeholder value
+
+gallons_needed = generate_gallons_needed(car_model, car_make, remaining_tank_capacity)
+
+# Calculate total cost to go to each gas station
+for station in gas_stations:
+    gallons_required = max(0, gallons_needed - remaining_tank_capacity)  # Calculate additional gallons needed
+    total_cost = gallons_required * station["gas_price"]  # Calculate total cost
+    station["total_cost"] = total_cost
+
+# Find the gas station with the lowest total cost
+best_station = min(gas_stations, key=lambda x: x["total_cost"])
+
+# Output recommendation
+print(f"Recommendation: Go to {best_station['name']} (Gas Price: ${best_station['gas_price']}/gal, Distance: {best_station['distance_from_home']} miles)")
+print(f"Total Cost: ${best_station['total_cost']:.2f}")
