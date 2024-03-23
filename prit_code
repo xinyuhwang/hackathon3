@@ -1,0 +1,24 @@
+import pandas as pd
+
+# Define your inputs
+car_model = 'Toyota Camry'
+car_make = '2015'
+remaining_tank = 0.25 # 25% tank left
+gas_stations = pd.DataFrame({
+    'Station': ['Station A', 'Station B', 'Station C'],
+    'Price': [3.50, 3.45, 3.60], # price per gallon
+    'Distance': [5, 7, 4] # distance from home in miles
+})
+
+# Function to predict gallons needed based on car model, make, and remaining tank capacity
+def predict_gallons_needed(car_model, car_make, remaining_tank):
+    # Replace this with your own language model
+    return 15 * (1 - remaining_tank) # assuming the tank capacity is 15 gallons
+
+gallons_needed = predict_gallons_needed(car_model, car_make, remaining_tank)
+
+# Calculate total cost for each gas station and find the one with the lowest cost
+gas_stations['Total Cost'] = gallons_needed * gas_stations['Price'] + gas_stations['Distance'] * 0.58 # assuming the cost of driving is 58 cents per mile
+best_station = gas_stations.loc[gas_stations['Total Cost'].idxmin(), 'Station']
+
+print(f'The best gas station to go to is {best_station} with a total cost of ${gas_stations["Total Cost"].min():.2f}.')
