@@ -1,39 +1,24 @@
-# Gas stations data (example)
-gas_stations = [
-    {"name": "Station A", "gas_price": 3.50, "distance_from_home": 5},
-    {"name": "Station B", "gas_price": 3.45, "distance_from_home": 8},
-    {"name": "Station C", "gas_price": 3.60, "distance_from_home": 10}
-]
+import pandas as pd
 
-# Car model and make
-car_model = "Toyota Camry"
-car_make = "2020"
-tank_capacity = 15  # Gallons
+# Define your inputs
+car_model = 'Toyota Camry'
+car_make = '2015'
+remaining_tank = 0.25 # 25% tank left
+gas_stations = pd.DataFrame({
+    'Station': ['Station A', 'Station B', 'Station C'],
+    'Price': [3.50, 3.45, 3.60], # price per gallon
+    'Distance': [5, 7, 4] # distance from home in miles
+})
 
-# Remaining tank capacity
-remaining_tank_capacity = float(input("Enter the remaining tank capacity (gallons): "))
+# Function to predict gallons needed based on car model, make, and remaining tank capacity
+def predict_gallons_needed(car_model, car_make, remaining_tank):
+    # Replace this with your own language model
+    return 15 * (1 - remaining_tank) # assuming the tank capacity is 15 gallons
 
-# Distance to drive
-distance_to_drive = float(input("Enter the distance to drive (miles): "))
+gallons_needed = predict_gallons_needed(car_model, car_make, remaining_tank)
 
-# Calculate gallons needed using LLM (placeholder)
-def generate_gallons_needed(car_model, car_make, remaining_tank_capacity):
-    # Placeholder code to generate gallons needed based on LLM
-    # This could involve querying a pre-trained model or using custom logic
-    # For simplicity, let's assume a fixed value for demonstration purposes
-    return 10  # Placeholder value
+# Calculate total cost for each gas station and find the one with the lowest cost
+gas_stations['Total Cost'] = gallons_needed * gas_stations['Price'] + gas_stations['Distance'] * 0.58 # assuming the cost of driving is 58 cents per mile
+best_station = gas_stations.loc[gas_stations['Total Cost'].idxmin(), 'Station']
 
-gallons_needed = generate_gallons_needed(car_model, car_make, remaining_tank_capacity)
-
-# Calculate total cost to go to each gas station
-for station in gas_stations:
-    gallons_required = max(0, gallons_needed - remaining_tank_capacity)  # Calculate additional gallons needed
-    total_cost = gallons_required * station["gas_price"]  # Calculate total cost
-    station["total_cost"] = total_cost
-
-# Find the gas station with the lowest total cost
-best_station = min(gas_stations, key=lambda x: x["total_cost"])
-
-# Output recommendation
-print(f"Recommendation: Go to {best_station['name']} (Gas Price: ${best_station['gas_price']}/gal, Distance: {best_station['distance_from_home']} miles)")
-print(f"Total Cost: ${best_station['total_cost']:.2f}")
+print(f'The best gas station to go to is {best_station} with a total cost of ${gas_stations["Total Cost"].min():.2f}.')
