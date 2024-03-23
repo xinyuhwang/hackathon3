@@ -1,7 +1,11 @@
-There are 3 gas stations nearby. The price for station A is 3.50, the price for station B is 3.45, the price for station C is 3.60. The distance from my location to station A is 5 miles, to station B is 7 miles, to station C is 4 miles.
-
+There are 3 gas stations nearby.  
+The distance from my location to ARCO is 2 miles, the price is 4.56 dollars per gallon.
+The distance from my location to Chevron is 0.9 miles, the price is 4.36 dollars per gallon.
+The distance from my location to Arco is 1.5 miles, the price is 4.54 dollars per gallon.
 The feul efficiency for Toyota Camry is 28 miles per gallon.
 
 The milage of my car is 54000 miles.
 
 The amount of gas you can buy with 1/4 of a tank is 3/4 of a tank.
+
+The Toyota Camry comes with a 15.8-gallon gas tank
