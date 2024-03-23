@@ -1,1 +1,2 @@
-# hackathon3
+# octoai_milvus
+projects using octoai and milvus
